@@ -53,9 +53,6 @@ match option:
             roxy_matrix = np.asarray(roxy, np.float32)
             roxy_inverted = 255 - roxy_matrix  # Invert operation
 
-            # Make sure only valid pixel intensities are kept
-            roxy_inverted = np.clip(roxy_inverted, 0, 255)
-
             # Turn matrix back into image
             roxy_inverted = roxy_inverted.astype('uint8')
 

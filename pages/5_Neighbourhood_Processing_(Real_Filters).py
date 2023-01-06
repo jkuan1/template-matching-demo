@@ -6,7 +6,7 @@ st.markdown(
     """
 )
 
-st.image("./pictures/ig_filters.jpg")
+st.image("./pictures/cat_grad_filter.jpg")
 
 st.markdown(
     """
