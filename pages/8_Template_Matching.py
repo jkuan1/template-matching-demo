@@ -72,12 +72,3 @@ nick_threshold = st.slider("Nick threshold", 0, 100, 75)
 nick_ans = FindTemplate(gaussian_pyr, nick_template,
                         float(nick_threshold / 100))
 st.image(nick_ans)
-
-"What if we used eyes and nose only?"
-liam_threshold = st.slider("Liam threshold", 0, 100, 75)
-liam_template = Image.open("./pictures/tm_liam_eyes.png").convert("L")
-st.image(liam_template, width=300)
-st.write(liam_template.size)
-liam_ans = FindTemplate(gaussian_pyr, liam_template,
-                        float(liam_threshold / 100))
-st.image(liam_ans)
