@@ -1,6 +1,6 @@
 import streamlit as st
-from skimage import data
 import numpy as np
+from PIL import Image
 
 st.set_page_config(
     page_title="How is Computer Vision Accompished", page_icon="❓")
@@ -28,27 +28,16 @@ st.markdown(
     """
 )
 
-coins = data.coins()
+tofu_pic = Image.open("./pictures/tofu.jpg").resize((300, 400), Image.BICUBIC)
+tofu_bw = tofu_pic.convert("L")
+tofu_matrix = np.asarray(tofu_pic)
 
-st.dataframe(coins)
-st.write(coins.shape)
-st.image(coins)
+st.dataframe(np.asarray(tofu_bw))
+st.write(tofu_bw.size)
+st.image(tofu_bw)
 
-cat = data.chelsea()
-cat_matrix = []
+tofu_list = np.ndarray.tolist(tofu_matrix)
 
-i = 0
-while i < cat.shape[0]:
-    row = []
-    j = 0
-    while j < cat.shape[1]:
-        cell = str(cat[i, j, :])
-        row.append(cell)
-        j += 1
-
-    cat_matrix.append(row)
-    i += 1
-
-st.dataframe(cat_matrix)
-st.write(cat.shape)
-st.image(cat)
+st.dataframe(tofu_list)
+st.write(tofu_matrix.shape)
+st.image(tofu_pic)
