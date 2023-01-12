@@ -4,19 +4,6 @@ import numpy as np
 from utils import MakeGaussianPyramid, ShowGaussianPyramid, FindTemplate
 from scipy import ndimage
 
-st.markdown("""
-# Now lets apply everything we learned so far with some classic machine learning
-#
-### Let us consider the following problem: How do we create an algorithm that can detect faces?
-#
-### Well, maybe should re-look at an interesting property of correlations.
-### In linear algebra, our correlation operation is mathematically equivalent of finding a dot product between two vectors
-### The dot product can be used to find the angle between two vectors for any n-dimensions.
-### In the context of computer vision, this means that the correlation operation can mathematically tell us how similar our filter is to our image.
-""")
-
-st.image("./pictures/template_matching.png")
-
 
 # org_template = Image.open("./pictures/template.jpeg")
 org_template = Image.open("./pictures/tm_justin.png").convert("L")

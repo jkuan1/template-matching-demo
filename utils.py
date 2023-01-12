@@ -168,6 +168,7 @@ def FindTemplate(pyramid, template, threshold):
     ~~~~~~~~~~~~~~~~~~~
     ans            RGB PIL image with red lines to represent where 
                    matches are in the first layer of the pyramid
+    num_matches
     """
 
     # resize the template to be 15 pixels in width
@@ -182,6 +183,8 @@ def FindTemplate(pyramid, template, threshold):
     # record dimensions to help with scaling the boxes later
     ans_w, ans_h = ans.size
     template_w, template_h = template.size
+    
+    num_matches = 0
 
     # do ncc for each layer and scale if necessary
     for layer in pyramid:
@@ -199,6 +202,8 @@ def FindTemplate(pyramid, template, threshold):
             for j in range(0, w):
                 # if a similarity value is above the threshold
                 if corr_arr[i][j] > threshold:
+
+                    num_matches += 1
 
                     # calculate center point coordinates
                     y_cord = i * scale
@@ -222,7 +227,7 @@ def FindTemplate(pyramid, template, threshold):
                               fill="red", width=2)
                     del draw
 
-    return ans
+    return ans, num_matches
 
 
 def normxcorr2D(image, template):
@@ -242,11 +247,6 @@ def normxcorr2D(image, template):
 
                 Wherever the search space has zero variance under the template,
                 normalized cross-correlation is undefined.
-
-    Implemented for CPSC 425 Assignment 3
-
-    Bob Woodham
-    January, 2013
     """
 
     # (one-time) normalization of template
