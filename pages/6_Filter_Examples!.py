@@ -1,8 +1,7 @@
 import streamlit as st
 from PIL import Image
-from scipy import signal, ndimage
+from scipy import signal
 import numpy as np
-import cv2
 from utils import gauss2d, show_code
 
 einstein_pic = Image.open("./pictures/einstein.jpeg")
@@ -34,7 +33,8 @@ if st.button("Answer to Example 1"):
     st.image(answer, width=width)
 
 st.write("Example 2")
-ex2_filter = [[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49],[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49]]
+ex2_filter = [[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1 /
+                                                                                                                                                   49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49]]
 st.image(einstein_pic, width=width)
 st.markdown(
     """
@@ -48,7 +48,8 @@ st.markdown(
     | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 |
     """
 )
-einstein_box = signal.convolve2d(einstein_matrix, ex2_filter, 'same').astype('uint8')
+einstein_box = signal.convolve2d(
+    einstein_matrix, ex2_filter, 'same').astype('uint8')
 if st.button("Answer to Example 2"):
     st.write(
         "We get an effect called 'smoothing'. This filter is known as a box filter.")
@@ -70,7 +71,8 @@ st.markdown(
     | 0.0000 | 0.0002 | 0.0011 | 0.0018 | 0.0011 | 0.0002 | 0.0000 |
     """
 )
-einstein_gauss = signal.convolve2d(einstein_matrix, gauss_kernel, 'same').astype('uint8')
+einstein_gauss = signal.convolve2d(
+    einstein_matrix, gauss_kernel, 'same').astype('uint8')
 
 if st.button("Answer to Example 3"):
     st.write(
@@ -150,4 +152,3 @@ st.markdown(
     ### So in conclusion, its easier to use convolutions when the filters are not symmetric. If the filters are symmetric, then both types of operations have the same result. As such, we always do convolutions by default.
     """
 )
-

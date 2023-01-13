@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def run():
     st.set_page_config(
         page_title="Computer Vision Demo",
@@ -13,15 +14,12 @@ def run():
 
         Disclaimer: This is an ungodly attempt to do justice to the vast field known as computer vision
 
-        
-        -------------------------
-
-        ### What this is
-
-        ### Who this is for
+        # General Purpose:
+        - Test the waters - give us a conceptual foundation to undestand how open source libraries work
        
     """
     )
+
 
 if __name__ == "__main__":
     run()

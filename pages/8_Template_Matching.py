@@ -2,8 +2,16 @@ import streamlit as st
 from PIL import Image
 from utils import MakeGaussianPyramid, ShowGaussianPyramid, FindTemplate
 
+st.set_page_config(
+    page_title="Template Matching", page_icon="")
+
 st.markdown("""
-# Now lets apply everything we learned so far with some classic machine learning
+# RECAP:
+- We know that images are just matrices
+- We know how to apply effects to these matrices 
+- We know that we can pretty accurately resize these matrices
+
+# Now lets apply everything we learned so far with a classic machine learning procedure
 #
 ### Let us consider the following problem: How do we create an algorithm that can detect certain objects?
 #
@@ -32,11 +40,10 @@ st.markdown("""
 #### - Why don't we turn everything into greyscale?
 #### - We can finetune a good threshold to get an acceptable ratio of false positives and false negatives
 
-# The template object:
 """)
 
 template = Image.open("./pictures/Taipei_101_layer2.jpg").convert("L")
-st.image(template, width = 300)
+st.image(template, width=300)
 
 image = Image.open("./pictures/Taipei_101.jpg").convert("L")
 st.image(image)
@@ -45,4 +52,4 @@ gaussian_pyr = MakeGaussianPyramid(image, 0.90, 40)
 st.image(ShowGaussianPyramid(gaussian_pyr))
 
 ans, matches = FindTemplate(gaussian_pyr, template, 0.85)
-st.image(ans, width = 500)
+st.image(ans, width=500)

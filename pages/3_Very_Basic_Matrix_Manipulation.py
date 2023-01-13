@@ -1,6 +1,10 @@
 import streamlit as st
 from utils import show_code
 
+
+st.set_page_config(
+    page_title="Let Chelsea show us how its done", page_icon="")
+
 st.markdown(
     """
     # Lets try it out!

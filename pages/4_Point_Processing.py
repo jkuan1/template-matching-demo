@@ -2,7 +2,9 @@ import streamlit as st
 from utils import show_code
 from PIL import Image
 import numpy as np
-import math
+
+st.set_page_config(
+    page_title="Roxy FTW", page_icon="❓")
 
 st.markdown(
     """
@@ -146,24 +148,24 @@ match option:
             return roxy_sine
 
         image_transform = get_image
-    
+
     case "Thresholding":
         st.write("Formula: I'(X,Y) = 255 if I(X,Y) > 128 else 0 ")
         st.write("Note: Threshold can be any value! Not just 128!")
 
         def get_image():
             roxy = Image.open("./pictures/roxy.jpg").convert("L")
-
             roxy_matrix = np.asarray(roxy, np.float32)
-            
-            threshold_func = np.vectorize(lambda x: 255 if x > 128 else 0)
+            light = roxy_matrix >= 128
+            dark = roxy_matrix < 128
 
-            roxy_threshold = threshold_func(roxy_matrix).astype('uint8')
+            roxy_matrix[light] = 255
+            roxy_matrix[dark] = 0
+            roxy_threshold = np.clip(roxy_matrix, 0, 255).astype('uint8')
 
             return roxy_threshold
-        
-        image_transform = get_image
 
+        image_transform = get_image
 
 
 st.image(image_transform(), width=image_width)

@@ -1,5 +1,9 @@
 import streamlit as st
 
+
+st.set_page_config(
+    page_title="Neighbourhood Operations", page_icon="")
+
 st.markdown(
     """
     # Let's get a little more hardcore with our filtering now ;) 
