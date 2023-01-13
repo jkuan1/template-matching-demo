@@ -33,6 +33,7 @@ def render_cat():
     y_coord = st.slider("Move the filter top to bottom",
                         0, cat_dims[0] - filter_size, 0)
 
+    # matrix manipulation
     cat[y_coord:y_coord + filter_size,
         x_coord:x_coord + filter_size, :] = [red, green, blue]
 

@@ -1,13 +1,12 @@
 import streamlit as st
 from PIL import Image
-from scipy import signal, ndimage
+from scipy import signal
 import numpy as np
-import cv2
 from utils import gauss2d, show_code
 
 einstein_pic = Image.open("./pictures/einstein.jpeg")
 einstein_matrix = np.asarray(einstein_pic, np.float32)
-width = 200
+width = 400
 
 st.markdown(
     """
@@ -17,7 +16,11 @@ st.markdown(
 
 st.write("Example 1")
 ex1_filter = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
-st.image(einstein_pic, width=width)
+answer1 = signal.convolve2d(einstein_matrix, ex1_filter, 'same')
+answer1 = np.clip(einstein_matrix, 0, 255)
+answer1 = answer1.astype('uint8')
+combination1 = np.concatenate((einstein_pic, answer1), axis=1)
+st.image(combination1, width=width)
 st.markdown(
     """
     | 0    | 0    | 0    |
@@ -26,16 +29,12 @@ st.markdown(
     | 0    | 0    | 0    |
     """
 )
-if st.button("Answer to Example 1"):
-    answer = signal.convolve2d(einstein_matrix, ex1_filter, 'same')
-    answer = np.clip(einstein_matrix, 0, 255)
-    answer = answer.astype('uint8')
-    st.write("Nothing happens!")
-    st.image(answer, width=width)
 
 st.write("Example 2")
 ex2_filter = [[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49],[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49]]
-st.image(einstein_pic, width=width)
+einstein_box = signal.convolve2d(einstein_matrix, ex2_filter, 'same').astype('uint8')
+combination2 = np.concatenate((einstein_pic, einstein_box), axis=1)
+st.image(combination2, width=width)
 st.markdown(
     """
     | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 |
@@ -48,16 +47,14 @@ st.markdown(
     | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 | 1/49 |
     """
 )
-einstein_box = signal.convolve2d(einstein_matrix, ex2_filter, 'same').astype('uint8')
-if st.button("Answer to Example 2"):
-    st.write(
-        "We get an effect called 'smoothing'. This filter is known as a box filter.")
-    st.image(einstein_box, width=width)
+st.write("We get an effect called 'smoothing'. This filter is known as a box filter.")
+
 
 st.write("Example 3")
-# sap_pic = Image.open("./pictures/salt-and-pepper-effect.png")
-st.image(einstein_pic, width=width)
 gauss_kernel = gauss2d(1)
+einstein_gauss = signal.convolve2d(einstein_matrix, gauss_kernel, 'same').astype('uint8')
+combination3 = np.concatenate((einstein_pic, einstein_gauss), axis=1)
+st.image(combination3, width=width)
 st.markdown(
     """
     | 0.0000 | 0.0002 | 0.0011 | 0.0018 | 0.0011 | 0.0002 | 0.0000 |
@@ -70,20 +67,19 @@ st.markdown(
     | 0.0000 | 0.0002 | 0.0011 | 0.0018 | 0.0011 | 0.0002 | 0.0000 |
     """
 )
-einstein_gauss = signal.convolve2d(einstein_matrix, gauss_kernel, 'same').astype('uint8')
 
-if st.button("Answer to Example 3"):
+
+if st.button("What is this type of filter called?"):
     st.write(
         "We still get 'smoothing'. But this is using a filter that replicates the gaussian distribution (bell curve). The formula is: ")
     st.image("./pictures/gaussian_formula.jpg")
     st.write("Visually, this is what it looks like for a 2D domain: ")
     st.image("./pictures/gaussian_distribution.png")
-    st.image(einstein_gauss)
     show_code(gauss2d)
 
 st.markdown(
     """
-    # BONUS: Box vs Gaussian - Where is the smoothing different?
+    # BONUS: Box vs Gaussian - Why is the smoothing different?
     """
 )
 comparison = np.concatenate((einstein_box, einstein_gauss), axis=1)

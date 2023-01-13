@@ -12,16 +12,11 @@ def run():
         ## By Justin Kuan
 
         Disclaimer: This is an ungodly attempt to do justice to the vast field known as computer vision
-
-        
-        -------------------------
-
-        ### What this is
-
-        ### Who this is for
        
     """
     )
+
+    st.image("./pictures/stats-joke.jpeg")
 
 if __name__ == "__main__":
     run()
