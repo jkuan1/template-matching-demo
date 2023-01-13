@@ -60,6 +60,5 @@ if image_file and template_file:
     threshold = st.slider("What is the threshold", 0.00,
                           1.00, 0.70)
 
-    ans = FindTemplate(gpyr_image, template, threshold)
+    ans, _ = FindTemplate(gpyr_image, template, threshold)
     st.image(ans)
-    st.write("DID YOU HAVE FUN")

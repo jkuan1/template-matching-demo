@@ -4,7 +4,10 @@ from utils import MakeGaussianPyramid, ShowGaussianPyramid, FindTemplate
 
 st.markdown("""
 # Now lets apply everything we learned so far with some classic machine learning
-#
+ - we learned that images are just matrices
+ - we learned what correlation is
+ - we learned how to resize images
+
 ### Let us consider the following problem: How do we create an algorithm that can detect certain objects?
 #
 ### Well, maybe should re-look at an interesting property of correlations.
