@@ -8,7 +8,8 @@ st.set_page_config(
 # org_template = Image.open("./pictures/template.jpeg")
 org_template = Image.open("./pictures/tm_justin_2.jpg").convert("L")
 tm_height, tm_width = org_template.size
-org_template = org_template.resize((int(tm_height / 3), int(tm_width / 3)), resample=Image.BICUBIC)
+org_template = org_template.resize(
+    (int(tm_height / 3), int(tm_width / 3)), resample=Image.BICUBIC)
 st.image(org_template, width=300)
 st.write(org_template.size)
 template_test = Image.open(
@@ -49,3 +50,14 @@ judy_threshold = st.slider("Judy threshold", 0.01, 1.00, 1.00)
 judy_ans, _ = FindTemplate(gaussian_pyr, judy_template, judy_threshold)
 st.image(judy_ans)
 
+"Hmmmmm let's try another one"
+st.image(judy_template, width=300)
+st.write(judy_template.size)
+
+picard = Image.open("./pictures/picard_meme.jpeg").convert("L")
+st.image(picard)
+picard_pyr = MakeGaussianPyramid(picard, 0.90, 100)
+st.image(ShowGaussianPyramid(picard_pyr))
+picard_threshold = st.slider("Picard threshold", 0.01, 1.00, 1.00)
+picard_ans, _ = FindTemplate(picard_pyr, judy_template, picard_threshold)
+st.image(picard_ans)
