@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 from scipy import signal
+from scipy import signal
 import numpy as np
 from utils import gauss2d, show_code
 
@@ -146,4 +147,3 @@ st.markdown(
     ### So in conclusion, its easier to use convolutions when the filters are not symmetric. If the filters are symmetric, then both types of operations have the same result. As such, we always do convolutions by default.
     """
 )
-

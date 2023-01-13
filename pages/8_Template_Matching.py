@@ -2,6 +2,9 @@ import streamlit as st
 from PIL import Image
 from utils import MakeGaussianPyramid, ShowGaussianPyramid, FindTemplate
 
+st.set_page_config(
+    page_title="Template Matching", page_icon="")
+
 st.markdown("""
 # Now lets apply everything we learned so far with some classic machine learning
  - we learned that images are just matrices
@@ -35,11 +38,10 @@ st.markdown("""
 #### - Why don't we turn everything into greyscale?
 #### - We can finetune a good threshold to get an acceptable ratio of false positives and false negatives
 
-# The template object:
 """)
 
 template = Image.open("./pictures/Taipei_101_layer2.jpg").convert("L")
-st.image(template, width = 300)
+st.image(template, width=300)
 
 image = Image.open("./pictures/Taipei_101.jpg").convert("L")
 st.image(image)

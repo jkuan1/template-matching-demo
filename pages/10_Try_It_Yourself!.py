@@ -7,13 +7,15 @@ from scipy import ndimage
 gpyr_image, template = None, None
 
 
-def resize_image(image_arr, scale):
-    gaussian = ndimage.gaussian_filter(
-        input=image_arr, sigma=1/(2 * scale)).astype('uint8')
-    image = Image.fromarray(gaussian).resize(
-        (int(width * scale), int(height * scale)), Image.BICUBIC)
+st.set_page_config(
+    page_title="DIY", page_icon="")
 
-    return image
+
+def resize_image(image, scale):
+    new_image = image.resize(
+        (image.shape[0] * scale, image.shape[1] * scale), resample=Image.BICUBIC)
+
+    return new_image
 
 
 template_file = st.file_uploader(
@@ -24,9 +26,6 @@ if template_file:
     width, height = template.size
     template_arr = np.asarray(template, np.float32)
     scale = st.slider("Did you want to resize the template?", 0.01, 1.00, 1.00)
-    template_arr = ndimage.gaussian_filter(
-        input=template_arr, sigma=1/(2 * scale)).astype('uint8')
-    template = Image.fromarray(template_arr)
     template = template.resize(
         (int(width * scale), int(height * scale)), Image.BICUBIC)
 
@@ -39,12 +38,8 @@ image_file = st.file_uploader(
 if image_file:
     image = Image.open(image_file).convert("L")
     width, height = image.size
-    image_arr = np.asarray(image, np.float32)
     image_scale = st.slider(
         "Did you want to resize the image?", 0.01, 1.00, 1.00)
-    image_arr = ndimage.gaussian_filter(
-        input=image_arr, sigma=1/(2 * image_scale)).astype('uint8')
-    image = Image.fromarray(image_arr)
     image = image.resize(
         (int(width * image_scale), int(height * image_scale)), Image.BICUBIC)
     st.image(image, width=600)

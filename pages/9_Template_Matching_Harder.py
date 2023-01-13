@@ -1,9 +1,9 @@
 import streamlit as st
-from PIL import Image, ImageDraw
-import numpy as np
+from PIL import Image
 from utils import MakeGaussianPyramid, ShowGaussianPyramid, FindTemplate
-from scipy import ndimage
 
+st.set_page_config(
+    page_title="Let's try some examples from TTT!", page_icon="")
 
 # org_template = Image.open("./pictures/template.jpeg")
 org_template = Image.open("./pictures/tm_justin_2.jpg").convert("L")
