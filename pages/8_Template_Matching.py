@@ -46,3 +46,15 @@ st.image(ShowGaussianPyramid(gaussian_pyr))
 
 ans, matches = FindTemplate(gaussian_pyr, template, 0.85)
 st.image(ans, width = 500)
+
+template2 = Image.open("./pictures/judy_template.jpg").convert("L")
+st.image(template2, width = 300)
+
+image2 = Image.open("./pictures/students.jpg").convert("L")
+st.image(image2)
+
+gaussian_pyr2 = MakeGaussianPyramid(image2, 0.90, 40)
+st.image(ShowGaussianPyramid(gaussian_pyr2))
+
+ans2, matches = FindTemplate(gaussian_pyr2, template2, 0.65)
+st.image(ans2, width = 500)
