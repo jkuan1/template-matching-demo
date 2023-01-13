@@ -23,8 +23,6 @@ st.markdown(
     ### Coloured images are 3D matrices
 
     ### All pixel intensities will always be in the range of 0 to 255
-
-    ### Knowing how to manipulate these matrices is the foundation of computer vision!
     """
 )
 

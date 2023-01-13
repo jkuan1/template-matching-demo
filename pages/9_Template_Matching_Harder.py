@@ -34,11 +34,11 @@ st.image(find_template())
 # st.image(test)
 # st.write(test.size)
 
-"What if we used a lower res image for the template?"
+"What if we used someone with glasses and is showing teeth?"
 nick_template = Image.open("./pictures/tm_nick3.png").convert("L")
 st.image(nick_template, width=300)
 st.write(nick_template.size)
-nick_threshold = st.slider("Nick threshold", 0.01, 1.00, 0.75)
+nick_threshold = st.slider("Nick threshold", 0.01, 1.00, 1.00)
 nick_ans, _ = FindTemplate(gaussian_pyr, nick_template, nick_threshold)
 st.image(nick_ans)
 

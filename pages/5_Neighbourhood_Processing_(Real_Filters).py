@@ -10,8 +10,6 @@ st.markdown(
     """
 )
 
-st.image("./pictures/cat_grad_filter.jpg")
-
 st.markdown(
     """
     # What if the neighbouring pixels of a point affects the output image? 
@@ -21,3 +19,5 @@ st.markdown(
 st.image("./pictures/neighbourhood_operation.png")
 
 st.image("./pictures/linear_filter_example.png")
+
+st.image("./pictures/cat_grad_filter.jpg")

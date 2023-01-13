@@ -28,13 +28,11 @@ st.markdown("""
 #### - objects can be of different scales
 #### - objects can be in different orientations
 #### - Images can have different lighting conditions
-#### - There is a huge variety of objects
 #### - objects can be partially covered
-#### - objects can have different perspectives
 #### - There may be motion / blur in the image
 
 ### What can we do to mitigate these issues?
-#### - Why don't we provide the template object at different sizes and compare that?
+#### - Why don't we provide the image at different sizes and compare all the sizes to the template?
 #### - Why don't we turn everything into greyscale?
 #### - We can finetune a good threshold to get an acceptable ratio of false positives and false negatives
 
@@ -50,10 +48,10 @@ gaussian_pyr = MakeGaussianPyramid(image, 0.90, 40)
 st.image(ShowGaussianPyramid(gaussian_pyr))
 
 ans, matches = FindTemplate(gaussian_pyr, template, 0.85)
-st.image(ans, width = 500)
+st.image(ans, width=500)
 
 template2 = Image.open("./pictures/judy_template.jpg").convert("L")
-st.image(template2, width = 300)
+st.image(template2, width=300)
 
 image2 = Image.open("./pictures/students.jpg").convert("L")
 st.image(image2)
@@ -62,4 +60,4 @@ gaussian_pyr2 = MakeGaussianPyramid(image2, 0.90, 40)
 st.image(ShowGaussianPyramid(gaussian_pyr2))
 
 ans2, matches = FindTemplate(gaussian_pyr2, template2, 0.65)
-st.image(ans2, width = 500)
+st.image(ans2, width=500)

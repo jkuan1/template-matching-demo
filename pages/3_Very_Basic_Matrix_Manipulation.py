@@ -7,7 +7,8 @@ st.set_page_config(
 
 st.markdown(
     """
-    # Lets try it out!
+    # Knowing how to manipulate these matrices is the foundation of computer vision!
+    # So lets try it out!
     """
 )
 

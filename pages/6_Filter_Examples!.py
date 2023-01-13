@@ -5,8 +5,9 @@ from scipy import signal
 import numpy as np
 from utils import gauss2d, show_code
 
-einstein_pic = Image.open("./pictures/einstein.jpeg")
-einstein_matrix = np.asarray(einstein_pic, np.float32)
+picture = Image.open(
+    "./pictures/drop_bear.jpg").convert("L").resize((579, 772))
+matrix = np.asarray(picture, np.float32)
 width = 400
 
 st.markdown(
@@ -17,10 +18,10 @@ st.markdown(
 
 st.write("Example 1")
 ex1_filter = [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
-answer1 = signal.convolve2d(einstein_matrix, ex1_filter, 'same')
-answer1 = np.clip(einstein_matrix, 0, 255)
+answer1 = signal.convolve2d(matrix, ex1_filter, 'same')
+answer1 = np.clip(matrix, 0, 255)
 answer1 = answer1.astype('uint8')
-combination1 = np.concatenate((einstein_pic, answer1), axis=1)
+combination1 = np.concatenate((picture, answer1), axis=1)
 st.image(combination1, width=width)
 st.markdown(
     """
@@ -32,9 +33,11 @@ st.markdown(
 )
 
 st.write("Example 2")
-ex2_filter = [[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49],[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49]]
-einstein_box = signal.convolve2d(einstein_matrix, ex2_filter, 'same').astype('uint8')
-combination2 = np.concatenate((einstein_pic, einstein_box), axis=1)
+ex2_filter = [[1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1 /
+                                                                                                                                                   49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49], [1/49, 1/49, 1/49, 1/49, 1/49, 1/49, 1/49]]
+einstein_box = signal.convolve2d(
+    matrix, ex2_filter, 'same').astype('uint8')
+combination2 = np.concatenate((picture, einstein_box), axis=1)
 st.image(combination2, width=width)
 st.markdown(
     """
@@ -53,8 +56,9 @@ st.write("We get an effect called 'smoothing'. This filter is known as a box fil
 
 st.write("Example 3")
 gauss_kernel = gauss2d(1)
-einstein_gauss = signal.convolve2d(einstein_matrix, gauss_kernel, 'same').astype('uint8')
-combination3 = np.concatenate((einstein_pic, einstein_gauss), axis=1)
+einstein_gauss = signal.convolve2d(
+    matrix, gauss_kernel, 'same').astype('uint8')
+combination3 = np.concatenate((picture, einstein_gauss), axis=1)
 st.image(combination3, width=width)
 st.markdown(
     """
